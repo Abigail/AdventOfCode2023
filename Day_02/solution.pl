@@ -18,12 +18,11 @@ my $solution_1 = 0;
 my $solution_2 = 0;
 
 while (<>) {
-    s/Game\s*([0-9]+):\s*// or die "Failed to parse: $_";
-    my $game = $1;
+    my ($game) = /([0-9]+)/;
 
-    my $max_red   = max (/([0-9]+)\s+red/g)   || 0;
-    my $max_green = max (/([0-9]+)\s+green/g) || 0;
-    my $max_blue  = max (/([0-9]+)\s+blue/g)  || 0;
+    my  $max_red   = max (/([0-9]+)\s+red/g)   || 0;
+    my  $max_green = max (/([0-9]+)\s+green/g) || 0;
+    my  $max_blue  = max (/([0-9]+)\s+blue/g)  || 0;
 
     $solution_1 += $game if   $max_red   <= $MAX_RED   &&
                               $max_green <= $MAX_GREEN &&

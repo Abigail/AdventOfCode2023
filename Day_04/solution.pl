@@ -8,8 +8,6 @@ no  warnings 'syntax';
 
 @ARGV = "input" unless @ARGV;
 
-use List::Util qw [sum];
-
 my $solution_1 = 0;
 my $solution_2 = 0;
 my @cards;

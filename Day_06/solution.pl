@@ -16,6 +16,9 @@ my $solution_2 = 0;
 my @times     = <> =~ /\d+/ga;
 my @distances = <> =~ /\d+/ga;
 
+push @times     => join "" => @times;
+push @distances => join "" => @distances;
+
 sub distance ($pressed, $race_length) {
     ($race_length - $pressed) * $pressed;
 }
@@ -23,22 +26,13 @@ sub distance ($pressed, $race_length) {
 foreach my $race (keys @times) {
     my $time     = $times     [$race];
     my $distance = $distances [$race];
-    my $wins     = 0;
+    my $wins     = $time + 1;
     foreach my $t (0 .. $time) {
-        $wins ++ if $distance < distance $t, $time;
+        $distance < distance ($t, $time) ? last : ($wins -= 2);
     }
-    $solution_1 *= $wins;
+    $solution_1 *= $wins if $race != $#times;
+    $solution_2  = $wins if $race == $#times;
 }
-
-my $big_time     = join "" => @times;
-my $big_distance = join "" => @distances;
-
-my $losses;
-for my $t (0 .. $big_time) {
-    $big_distance < distance ($t, $big_time) ? last : $losses ++;
-}
-
-$solution_2 = $big_time + 1 - 2 * $losses;
 
 say "Solution 1: $solution_1";
 say "Solution 2: $solution_2";

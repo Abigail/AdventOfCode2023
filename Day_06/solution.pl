@@ -33,9 +33,12 @@ foreach my $race (keys @times) {
 my $big_time     = join "" => @times;
 my $big_distance = join "" => @distances;
 
+my $losses;
 for my $t (0 .. $big_time) {
-    $solution_2 ++ if $big_distance < distance $t, $big_time;
+    $big_distance < distance ($t, $big_time) ? last : $losses ++;
 }
+
+$solution_2 = $big_time + 1 - 2 * $losses;
 
 say "Solution 1: $solution_1";
 say "Solution 2: $solution_2";
